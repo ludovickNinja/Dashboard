@@ -6,17 +6,63 @@ const dashboardData = {
     inHouse: 57,
   },
   weeklyFactoryPieces: [
-    { week: "2026-W01", factoryA: 420, factoryB: 370, factoryC: 290 },
-    { week: "2026-W02", factoryA: 460, factoryB: 410, factoryC: 310 },
-    { week: "2026-W03", factoryA: 510, factoryB: 395, factoryC: 335 },
-    { week: "2026-W04", factoryA: 545, factoryB: 430, factoryC: 360 },
-    { week: "2026-W05", factoryA: 600, factoryB: 455, factoryC: 390 },
-    { week: "2026-W06", factoryA: 640, factoryB: 490, factoryC: 420 },
+    {
+      week: "2026-W01",
+      factoryA: 420,
+      factoryB: 370,
+      factoryC: 290,
+      rejectionPct: 3.9,
+      onTimePct: 91.2,
+    },
+    {
+      week: "2026-W02",
+      factoryA: 460,
+      factoryB: 410,
+      factoryC: 310,
+      rejectionPct: 3.5,
+      onTimePct: 92.8,
+    },
+    {
+      week: "2026-W03",
+      factoryA: 510,
+      factoryB: 395,
+      factoryC: 335,
+      rejectionPct: 3.2,
+      onTimePct: 93.5,
+    },
+    {
+      week: "2026-W04",
+      factoryA: 545,
+      factoryB: 430,
+      factoryC: 360,
+      rejectionPct: 3,
+      onTimePct: 94.1,
+    },
+    {
+      week: "2026-W05",
+      factoryA: 600,
+      factoryB: 455,
+      factoryC: 390,
+      rejectionPct: 2.8,
+      onTimePct: 95.3,
+    },
+    {
+      week: "2026-W06",
+      factoryA: 640,
+      factoryB: 490,
+      factoryC: 420,
+      rejectionPct: 2.6,
+      onTimePct: 96.4,
+    },
   ],
 };
 
 function formatNumber(value) {
   return new Intl.NumberFormat().format(value);
+}
+
+function formatPercentage(value) {
+  return `${value.toFixed(1)}%`;
 }
 
 function calculateTotals(weekRow) {
@@ -26,6 +72,12 @@ function calculateTotals(weekRow) {
 function growthPercentage(current, previous) {
   if (!previous) return 0;
   return ((current - previous) / previous) * 100;
+}
+
+function getWeeklyDataNewestFirst() {
+  return [...dashboardData.weeklyFactoryPieces].sort((a, b) =>
+    b.week.localeCompare(a.week)
+  );
 }
 
 function renderKpis() {
@@ -48,10 +100,11 @@ function renderWeeklyBars() {
   const container = document.getElementById("weeklyBars");
   container.innerHTML = "";
 
-  const totals = dashboardData.weeklyFactoryPieces.map(calculateTotals);
+  const weeklyData = getWeeklyDataNewestFirst();
+  const totals = weeklyData.map(calculateTotals);
   const max = Math.max(...totals);
 
-  dashboardData.weeklyFactoryPieces.forEach((weekData, index) => {
+  weeklyData.forEach((weekData, index) => {
     const total = totals[index];
     const width = (total / max) * 100;
 
@@ -71,7 +124,7 @@ function renderWeeklyBars() {
 
 function renderGrowthTrend() {
   const container = document.getElementById("growthTrend");
-  const weekly = dashboardData.weeklyFactoryPieces;
+  const weekly = getWeeklyDataNewestFirst();
   const totals = weekly.map(calculateTotals);
 
   const width = 760;
@@ -123,9 +176,10 @@ function renderWeeklyTable() {
   const body = document.getElementById("weeklyTableBody");
   body.innerHTML = "";
 
-  const rows = dashboardData.weeklyFactoryPieces.map((week, index, all) => {
+  const weeklyData = getWeeklyDataNewestFirst();
+  const rows = weeklyData.map((week, index, all) => {
     const total = calculateTotals(week);
-    const previousTotal = index > 0 ? calculateTotals(all[index - 1]) : 0;
+    const previousTotal = index < all.length - 1 ? calculateTotals(all[index + 1]) : 0;
     const growth = growthPercentage(total, previousTotal);
     return { ...week, total, growth };
   });
@@ -133,9 +187,10 @@ function renderWeeklyTable() {
   rows.forEach((row, index) => {
     const tr = document.createElement("tr");
 
-    const growthText = index === 0 ? "—" : `${row.growth >= 0 ? "+" : ""}${row.growth.toFixed(1)}%`;
+    const growthText =
+      index === rows.length - 1 ? "—" : `${row.growth >= 0 ? "+" : ""}${row.growth.toFixed(1)}%`;
     const growthClass =
-      index === 0 ? "" : row.growth >= 0 ? "growth-positive" : "growth-negative";
+      index === rows.length - 1 ? "" : row.growth >= 0 ? "growth-positive" : "growth-negative";
 
     tr.innerHTML = `
       <td>${row.week}</td>
@@ -143,6 +198,8 @@ function renderWeeklyTable() {
       <td>${formatNumber(row.factoryB)}</td>
       <td>${formatNumber(row.factoryC)}</td>
       <td><strong>${formatNumber(row.total)}</strong></td>
+      <td>${formatPercentage(row.rejectionPct)}</td>
+      <td>${formatPercentage(row.onTimePct)}</td>
       <td class="${growthClass}">${growthText}</td>
     `;
 
