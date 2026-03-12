@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operations Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div>
+        <h1>Operations Dashboard</h1>
+        <p class="subtitle">Order status, factory allocation, and weekly production trends</p>
+      </div>
+      <div class="last-updated" id="lastUpdated"></div>
+    </header>
+
+    <main class="dashboard-grid">
+      <section class="card kpi-card">
+        <h2>Pending Orders</h2>
+        <p class="kpi-value" id="pendingOrders">0</p>
+      </section>
+
+      <section class="card kpi-card">
+        <h2>Assigned at Factory</h2>
+        <p class="kpi-value" id="factoryAssigned">0</p>
+      </section>
+
+      <section class="card kpi-card">
+        <h2>In House</h2>
+        <p class="kpi-value" id="inHouse">0</p>
+      </section>
+
+      <section class="card span-2">
+        <div class="section-header">
+          <h2>Weekly Pieces Sent by Factory</h2>
+          <span class="legend-note">Each bar = total pieces shipped in the selected week</span>
+        </div>
+        <div id="weeklyBars" class="bar-chart"></div>
+      </section>
+
+      <section class="card span-2">
+        <div class="section-header">
+          <h2>Growth Over Time</h2>
+          <span class="legend-note">Week-over-week total pieces and growth %</span>
+        </div>
+        <div id="growthTrend" class="line-chart"></div>
+      </section>
+
+      <section class="card span-2">
+        <h2>Weekly Breakdown</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Factory A</th>
+              <th>Factory B</th>
+              <th>Factory C</th>
+              <th>Total</th>
+              <th>Growth</th>
+            </tr>
+          </thead>
+          <tbody id="weeklyTableBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
