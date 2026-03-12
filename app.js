@@ -124,7 +124,7 @@ function renderWeeklyBars() {
 
 function renderGrowthTrend() {
   const container = document.getElementById("growthTrend");
-  const weekly = getWeeklyDataNewestFirst();
+  const weekly = [...getWeeklyDataNewestFirst()].reverse();
   const totals = weekly.map(calculateTotals);
 
   const width = 760;
