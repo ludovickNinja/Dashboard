@@ -5,6 +5,38 @@ const dashboardData = {
     assignedFactory: 129,
     inHouse: 57,
   },
+  assignmentHistoryDaily: [
+    { date: "2026-03-25", factories: { inHouse: 5, factoryA: 15, factoryB: 25 } },
+    { date: "2026-03-24", factories: { inHouse: 7, factoryA: 14, factoryB: 22 } },
+    { date: "2026-03-23", factories: { inHouse: 6, factoryA: 13, factoryB: 24 } },
+    { date: "2026-03-22", factories: { inHouse: 4, factoryA: 11, factoryB: 20 } },
+    { date: "2026-03-21", factories: { inHouse: 6, factoryA: 12, factoryB: 18 } },
+    { date: "2026-03-20", factories: { inHouse: 5, factoryA: 10, factoryB: 19 } },
+    { date: "2026-03-19", factories: { inHouse: 4, factoryA: 9, factoryB: 17 } },
+    { date: "2026-03-18", factories: { inHouse: 3, factoryA: 11, factoryB: 16 } },
+    { date: "2026-03-17", factories: { inHouse: 5, factoryA: 8, factoryB: 15 } },
+    { date: "2026-03-16", factories: { inHouse: 4, factoryA: 9, factoryB: 14 } },
+    { date: "2026-03-15", factories: { inHouse: 6, factoryA: 11, factoryB: 13 } },
+    { date: "2026-03-14", factories: { inHouse: 3, factoryA: 10, factoryB: 12 } },
+    { date: "2026-03-13", factories: { inHouse: 4, factoryA: 9, factoryB: 15 } },
+    { date: "2026-03-12", factories: { inHouse: 5, factoryA: 8, factoryB: 16 } },
+    { date: "2026-03-11", factories: { inHouse: 4, factoryA: 7, factoryB: 14 } },
+    { date: "2026-03-10", factories: { inHouse: 6, factoryA: 9, factoryB: 15 } },
+    { date: "2026-03-09", factories: { inHouse: 4, factoryA: 10, factoryB: 13 } },
+    { date: "2026-03-08", factories: { inHouse: 3, factoryA: 8, factoryB: 14 } },
+    { date: "2026-03-07", factories: { inHouse: 2, factoryA: 7, factoryB: 11 } },
+    { date: "2026-03-06", factories: { inHouse: 3, factoryA: 8, factoryB: 12 } },
+    { date: "2026-03-05", factories: { inHouse: 5, factoryA: 10, factoryB: 14 } },
+    { date: "2026-03-04", factories: { inHouse: 3, factoryA: 6, factoryB: 11 } },
+    { date: "2026-03-03", factories: { inHouse: 4, factoryA: 9, factoryB: 12 } },
+    { date: "2026-03-02", factories: { inHouse: 5, factoryA: 10, factoryB: 13 } },
+    { date: "2026-03-01", factories: { inHouse: 4, factoryA: 8, factoryB: 12 } },
+    { date: "2026-02-28", factories: { inHouse: 3, factoryA: 7, factoryB: 10 } },
+    { date: "2026-02-27", factories: { inHouse: 2, factoryA: 6, factoryB: 9 } },
+    { date: "2026-02-26", factories: { inHouse: 3, factoryA: 8, factoryB: 11 } },
+    { date: "2026-02-25", factories: { inHouse: 4, factoryA: 9, factoryB: 10 } },
+    { date: "2026-02-24", factories: { inHouse: 3, factoryA: 8, factoryB: 9 } },
+  ],
   weeklyFactoryPieces: [
     {
       week: "2026-W01",
@@ -57,6 +89,12 @@ const dashboardData = {
   ],
 };
 
+const FACTORY_LABELS = {
+  inHouse: "In House",
+  factoryA: "Factory A",
+  factoryB: "Factory B",
+};
+
 function formatNumber(value) {
   return new Intl.NumberFormat().format(value);
 }
@@ -80,6 +118,50 @@ function getWeeklyDataNewestFirst() {
   );
 }
 
+function parseISODate(dateText) {
+  return new Date(`${dateText}T00:00:00`);
+}
+
+function aggregateFactories(rows) {
+  return rows.reduce(
+    (totals, row) => {
+      Object.entries(row.factories).forEach(([factoryKey, value]) => {
+        totals[factoryKey] = (totals[factoryKey] || 0) + value;
+      });
+      return totals;
+    },
+    { inHouse: 0, factoryA: 0, factoryB: 0 }
+  );
+}
+
+function getAssignmentSummaries() {
+  const sorted = [...dashboardData.assignmentHistoryDaily].sort((a, b) =>
+    b.date.localeCompare(a.date)
+  );
+  const latest = sorted[0];
+  const latestDate = parseISODate(latest.date);
+
+  const weekStart = new Date(latestDate);
+  weekStart.setDate(latestDate.getDate() - latestDate.getDay());
+
+  const last7Start = new Date(latestDate);
+  last7Start.setDate(latestDate.getDate() - 6);
+
+  const monthStart = new Date(latestDate.getFullYear(), latestDate.getMonth(), 1);
+
+  const todayRows = sorted.filter((row) => row.date === latest.date);
+  const weekRows = sorted.filter((row) => parseISODate(row.date) >= weekStart);
+  const last7Rows = sorted.filter((row) => parseISODate(row.date) >= last7Start);
+  const monthRows = sorted.filter((row) => parseISODate(row.date) >= monthStart);
+
+  return [
+    { title: "Assigned Today", totals: aggregateFactories(todayRows) },
+    { title: "Assigned This Week", totals: aggregateFactories(weekRows) },
+    { title: "Assigned Last 7 Days", totals: aggregateFactories(last7Rows) },
+    { title: "Assigned This Month", totals: aggregateFactories(monthRows) },
+  ];
+}
+
 function renderKpis() {
   document.getElementById("pendingOrders").textContent = formatNumber(
     dashboardData.orders.pending
@@ -94,6 +176,36 @@ function renderKpis() {
   document.getElementById(
     "lastUpdated"
   ).textContent = `Last updated: ${dashboardData.updatedAt.toLocaleString()}`;
+}
+
+function renderAssignedPanel() {
+  const panelBody = document.getElementById("assignedPanelBody");
+  panelBody.innerHTML = "";
+
+  const summaries = getAssignmentSummaries();
+
+  summaries.forEach((summary) => {
+    const periodSection = document.createElement("section");
+    periodSection.className = "assigned-period";
+
+    const rowsMarkup = Object.entries(FACTORY_LABELS)
+      .map(
+        ([factoryKey, label]) => `
+          <div class="assigned-row">
+            <span>${label}</span>
+            <strong>${formatNumber(summary.totals[factoryKey] || 0)}</strong>
+          </div>
+        `
+      )
+      .join("");
+
+    periodSection.innerHTML = `
+      <h3>${summary.title}</h3>
+      <div class="assigned-list">${rowsMarkup}</div>
+    `;
+
+    panelBody.appendChild(periodSection);
+  });
 }
 
 function renderWeeklyBars() {
@@ -209,6 +321,7 @@ function renderWeeklyTable() {
 
 function initDashboard() {
   renderKpis();
+  renderAssignedPanel();
   renderWeeklyBars();
   renderGrowthTrend();
   renderWeeklyTable();
