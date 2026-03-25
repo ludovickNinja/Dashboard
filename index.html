@@ -31,7 +31,15 @@
         <p class="kpi-value" id="inHouse">0</p>
       </section>
 
-      <section class="card span-2">
+      <aside class="card assigned-panel" id="assignedPanel">
+        <div class="section-header">
+          <h2>Assigned by Factory</h2>
+          <span class="legend-note">Daily + rolling views</span>
+        </div>
+        <div id="assignedPanelBody" class="assigned-panel-body"></div>
+      </aside>
+
+      <section class="card span-main">
         <div class="section-header">
           <h2>Weekly Pieces Sent by Factory</h2>
           <span class="legend-note">Each bar = total pieces shipped in the selected week</span>
@@ -39,7 +47,7 @@
         <div id="weeklyBars" class="bar-chart"></div>
       </section>
 
-      <section class="card span-2">
+      <section class="card span-main">
         <div class="section-header">
           <h2>Growth Over Time</h2>
           <span class="legend-note">Week-over-week total pieces and growth %</span>
@@ -47,7 +55,7 @@
         <div id="growthTrend" class="line-chart"></div>
       </section>
 
-      <section class="card span-2">
+      <section class="card span-main">
         <h2>Weekly Breakdown</h2>
         <table>
           <thead>

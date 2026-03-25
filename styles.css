@@ -45,9 +45,10 @@ h1 {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
   gap: 1rem;
   padding: 0 2rem 2rem;
+  align-items: start;
 }
 
 .card {
@@ -70,8 +71,47 @@ h1 {
   margin: 0.5rem 0 0;
 }
 
-.span-2 {
-  grid-column: span 2;
+.span-main {
+  grid-column: 1 / span 3;
+}
+
+.assigned-panel {
+  grid-column: 4;
+  grid-row: 1 / span 4;
+}
+
+.assigned-panel-body {
+  margin-top: 0.75rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.assigned-period {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem;
+  background: #fbfcff;
+}
+
+.assigned-period h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+}
+
+.assigned-list {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.assigned-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-size: 0.92rem;
+}
+
+.assigned-row strong {
+  color: var(--accent);
 }
 
 .section-header {
@@ -169,12 +209,25 @@ th {
   font-weight: 600;
 }
 
+@media (max-width: 1300px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+
+  .span-main,
+  .assigned-panel {
+    grid-column: span 3;
+    grid-row: auto;
+  }
+}
+
 @media (max-width: 1100px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
 
-  .span-2 {
+  .span-main,
+  .assigned-panel {
     grid-column: span 1;
   }
 
