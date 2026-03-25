@@ -149,16 +149,39 @@ function getAssignmentSummaries() {
 
   const monthStart = new Date(latestDate.getFullYear(), latestDate.getMonth(), 1);
 
+  const sixMonthsStart = new Date(latestDate);
+  sixMonthsStart.setMonth(latestDate.getMonth() - 6);
+  sixMonthsStart.setDate(sixMonthsStart.getDate() + 1);
+
+  const yearStart = new Date(latestDate.getFullYear(), 0, 1);
+
+  const last365Start = new Date(latestDate);
+  last365Start.setDate(latestDate.getDate() - 364);
+
+  const lastYearStart = new Date(latestDate.getFullYear() - 1, 0, 1);
+  const lastYearEnd = new Date(latestDate.getFullYear() - 1, 11, 31);
+
   const todayRows = sorted.filter((row) => row.date === latest.date);
   const weekRows = sorted.filter((row) => parseISODate(row.date) >= weekStart);
   const last7Rows = sorted.filter((row) => parseISODate(row.date) >= last7Start);
   const monthRows = sorted.filter((row) => parseISODate(row.date) >= monthStart);
+  const sixMonthRows = sorted.filter((row) => parseISODate(row.date) >= sixMonthsStart);
+  const thisYearRows = sorted.filter((row) => parseISODate(row.date) >= yearStart);
+  const last365Rows = sorted.filter((row) => parseISODate(row.date) >= last365Start);
+  const lastYearRows = sorted.filter((row) => {
+    const rowDate = parseISODate(row.date);
+    return rowDate >= lastYearStart && rowDate <= lastYearEnd;
+  });
 
   return [
     { title: "Assigned Today", totals: aggregateFactories(todayRows) },
     { title: "Assigned This Week", totals: aggregateFactories(weekRows) },
     { title: "Assigned Last 7 Days", totals: aggregateFactories(last7Rows) },
     { title: "Assigned This Month", totals: aggregateFactories(monthRows) },
+    { title: "Assigned Last 6 Months", totals: aggregateFactories(sixMonthRows) },
+    { title: "Assigned This Year", totals: aggregateFactories(thisYearRows) },
+    { title: "Assigned Last 365 Days", totals: aggregateFactories(last365Rows) },
+    { title: "Assigned Last Year", totals: aggregateFactories(lastYearRows) },
   ];
 }
 
