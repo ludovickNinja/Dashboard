@@ -6,37 +6,63 @@ const dashboardData = {
     inHouse: 57,
   },
   assignmentHistoryDaily: [
-    { date: "2026-03-25", factories: { inHouse: 5, factoryA: 15, factoryB: 25 } },
-    { date: "2026-03-24", factories: { inHouse: 7, factoryA: 14, factoryB: 22 } },
-    { date: "2026-03-23", factories: { inHouse: 6, factoryA: 13, factoryB: 24 } },
-    { date: "2026-03-22", factories: { inHouse: 4, factoryA: 11, factoryB: 20 } },
-    { date: "2026-03-21", factories: { inHouse: 6, factoryA: 12, factoryB: 18 } },
-    { date: "2026-03-20", factories: { inHouse: 5, factoryA: 10, factoryB: 19 } },
-    { date: "2026-03-19", factories: { inHouse: 4, factoryA: 9, factoryB: 17 } },
-    { date: "2026-03-18", factories: { inHouse: 3, factoryA: 11, factoryB: 16 } },
-    { date: "2026-03-17", factories: { inHouse: 5, factoryA: 8, factoryB: 15 } },
-    { date: "2026-03-16", factories: { inHouse: 4, factoryA: 9, factoryB: 14 } },
-    { date: "2026-03-15", factories: { inHouse: 6, factoryA: 11, factoryB: 13 } },
-    { date: "2026-03-14", factories: { inHouse: 3, factoryA: 10, factoryB: 12 } },
-    { date: "2026-03-13", factories: { inHouse: 4, factoryA: 9, factoryB: 15 } },
-    { date: "2026-03-12", factories: { inHouse: 5, factoryA: 8, factoryB: 16 } },
-    { date: "2026-03-11", factories: { inHouse: 4, factoryA: 7, factoryB: 14 } },
-    { date: "2026-03-10", factories: { inHouse: 6, factoryA: 9, factoryB: 15 } },
-    { date: "2026-03-09", factories: { inHouse: 4, factoryA: 10, factoryB: 13 } },
-    { date: "2026-03-08", factories: { inHouse: 3, factoryA: 8, factoryB: 14 } },
-    { date: "2026-03-07", factories: { inHouse: 2, factoryA: 7, factoryB: 11 } },
-    { date: "2026-03-06", factories: { inHouse: 3, factoryA: 8, factoryB: 12 } },
-    { date: "2026-03-05", factories: { inHouse: 5, factoryA: 10, factoryB: 14 } },
-    { date: "2026-03-04", factories: { inHouse: 3, factoryA: 6, factoryB: 11 } },
-    { date: "2026-03-03", factories: { inHouse: 4, factoryA: 9, factoryB: 12 } },
-    { date: "2026-03-02", factories: { inHouse: 5, factoryA: 10, factoryB: 13 } },
-    { date: "2026-03-01", factories: { inHouse: 4, factoryA: 8, factoryB: 12 } },
-    { date: "2026-02-28", factories: { inHouse: 3, factoryA: 7, factoryB: 10 } },
-    { date: "2026-02-27", factories: { inHouse: 2, factoryA: 6, factoryB: 9 } },
-    { date: "2026-02-26", factories: { inHouse: 3, factoryA: 8, factoryB: 11 } },
-    { date: "2026-02-25", factories: { inHouse: 4, factoryA: 9, factoryB: 10 } },
-    { date: "2026-02-24", factories: { inHouse: 3, factoryA: 8, factoryB: 9 } },
+    { date: "2026-03-25", locations: { inHouse: 5, factoryA: 15, factoryB: 25, factoryC: 18 } },
+    { date: "2026-03-24", locations: { inHouse: 7, factoryA: 14, factoryB: 22, factoryC: 17 } },
+    { date: "2026-03-23", locations: { inHouse: 6, factoryA: 13, factoryB: 24, factoryC: 16 } },
+    { date: "2026-03-22", locations: { inHouse: 4, factoryA: 11, factoryB: 20, factoryC: 14 } },
+    { date: "2026-03-21", locations: { inHouse: 6, factoryA: 12, factoryB: 18, factoryC: 13 } },
+    { date: "2026-03-20", locations: { inHouse: 5, factoryA: 10, factoryB: 19, factoryC: 12 } },
+    { date: "2026-03-19", locations: { inHouse: 4, factoryA: 9, factoryB: 17, factoryC: 11 } },
+    { date: "2026-03-18", locations: { inHouse: 3, factoryA: 11, factoryB: 16, factoryC: 12 } },
+    { date: "2026-03-17", locations: { inHouse: 5, factoryA: 8, factoryB: 15, factoryC: 10 } },
+    { date: "2026-03-16", locations: { inHouse: 4, factoryA: 9, factoryB: 14, factoryC: 11 } },
+    { date: "2026-03-15", locations: { inHouse: 6, factoryA: 11, factoryB: 13, factoryC: 10 } },
+    { date: "2026-03-14", locations: { inHouse: 3, factoryA: 10, factoryB: 12, factoryC: 9 } },
+    { date: "2026-03-13", locations: { inHouse: 4, factoryA: 9, factoryB: 15, factoryC: 10 } },
+    { date: "2026-03-12", locations: { inHouse: 5, factoryA: 8, factoryB: 16, factoryC: 11 } },
+    { date: "2026-03-11", locations: { inHouse: 4, factoryA: 7, factoryB: 14, factoryC: 10 } },
+    { date: "2026-03-10", locations: { inHouse: 6, factoryA: 9, factoryB: 15, factoryC: 11 } },
+    { date: "2026-03-09", locations: { inHouse: 4, factoryA: 10, factoryB: 13, factoryC: 9 } },
+    { date: "2026-03-08", locations: { inHouse: 3, factoryA: 8, factoryB: 14, factoryC: 8 } },
+    { date: "2026-03-07", locations: { inHouse: 2, factoryA: 7, factoryB: 11, factoryC: 8 } },
+    { date: "2026-03-06", locations: { inHouse: 3, factoryA: 8, factoryB: 12, factoryC: 9 } },
+    { date: "2026-03-05", locations: { inHouse: 5, factoryA: 10, factoryB: 14, factoryC: 10 } },
+    { date: "2026-03-04", locations: { inHouse: 3, factoryA: 6, factoryB: 11, factoryC: 8 } },
+    { date: "2026-03-03", locations: { inHouse: 4, factoryA: 9, factoryB: 12, factoryC: 9 } },
+    { date: "2026-03-02", locations: { inHouse: 5, factoryA: 10, factoryB: 13, factoryC: 10 } },
+    { date: "2026-03-01", locations: { inHouse: 4, factoryA: 8, factoryB: 12, factoryC: 9 } },
+    { date: "2026-02-28", locations: { inHouse: 3, factoryA: 7, factoryB: 10, factoryC: 7 } },
+    { date: "2026-02-27", locations: { inHouse: 2, factoryA: 6, factoryB: 9, factoryC: 6 } },
+    { date: "2026-02-26", locations: { inHouse: 3, factoryA: 8, factoryB: 11, factoryC: 7 } },
+    { date: "2026-02-25", locations: { inHouse: 4, factoryA: 9, factoryB: 10, factoryC: 8 } },
+    { date: "2026-02-24", locations: { inHouse: 3, factoryA: 8, factoryB: 9, factoryC: 7 } },
   ],
+  assignedOrders: {
+    factoryA: [
+      { orderId: "A-1204", customer: "Northline", metal: "Silver", pieces: 22, dueDate: "2026-03-29", status: "Cutting" },
+      { orderId: "A-1207", customer: "Vantage", metal: "Gold", pieces: 16, dueDate: "2026-03-30", status: "Setting" },
+      { orderId: "A-1211", customer: "Crest", metal: "Platinum", pieces: 8, dueDate: "2026-04-01", status: "Polish" },
+      { orderId: "A-1216", customer: "Monroe", metal: "Gold", pieces: 14, dueDate: "2026-04-02", status: "Casting" },
+    ],
+    factoryB: [
+      { orderId: "B-903", customer: "Beacon", metal: "Silver", pieces: 30, dueDate: "2026-03-28", status: "Casting" },
+      { orderId: "B-909", customer: "Luma", metal: "Gold", pieces: 20, dueDate: "2026-03-30", status: "Stone set" },
+      { orderId: "B-914", customer: "Arbor", metal: "Platinum", pieces: 12, dueDate: "2026-04-03", status: "QC" },
+      { orderId: "B-915", customer: "Plume", metal: "Gold", pieces: 18, dueDate: "2026-04-04", status: "Polish" },
+    ],
+    factoryC: [
+      { orderId: "C-440", customer: "Brio", metal: "Silver", pieces: 26, dueDate: "2026-03-29", status: "Casting" },
+      { orderId: "C-445", customer: "Merit", metal: "Gold", pieces: 17, dueDate: "2026-03-31", status: "Stone set" },
+      { orderId: "C-452", customer: "Avery", metal: "Platinum", pieces: 9, dueDate: "2026-04-02", status: "QC" },
+      { orderId: "C-457", customer: "Dalton", metal: "Silver", pieces: 15, dueDate: "2026-04-05", status: "Polish" },
+    ],
+    inHouse: [
+      { orderId: "H-110", customer: "Atelier", metal: "Silver", pieces: 14, dueDate: "2026-03-28", status: "Design" },
+      { orderId: "H-114", customer: "Atelier", metal: "Gold", pieces: 12, dueDate: "2026-03-30", status: "Bench" },
+      { orderId: "H-119", customer: "Private", metal: "Platinum", pieces: 7, dueDate: "2026-04-01", status: "Stone set" },
+      { orderId: "H-122", customer: "Private", metal: "Gold", pieces: 10, dueDate: "2026-04-03", status: "QC" },
+    ],
+  },
   weeklyFactoryPieces: [
     {
       week: "2026-W01",
@@ -89,10 +115,30 @@ const dashboardData = {
   ],
 };
 
-const FACTORY_LABELS = {
+const LOCATION_LABELS = {
+  factoryA: "Factory 1",
+  factoryB: "Factory 2",
+  factoryC: "Factory 3",
   inHouse: "In House",
-  factoryA: "Factory A",
-  factoryB: "Factory B",
+};
+
+const TIMELINE_OPTIONS = [
+  { value: "today", label: "Today", days: 1 },
+  { value: "last7", label: "Last 7 Days", days: 7 },
+  { value: "last14", label: "Last 14 Days", days: 14 },
+  { value: "last30", label: "Last 30 Days", days: 30 },
+];
+
+const PIECE_PROFILES = {
+  factoryA: { silver: 0.32, gold: 0.4, platinum: 0.28 },
+  factoryB: { silver: 0.27, gold: 0.38, platinum: 0.35 },
+  factoryC: { silver: 0.3, gold: 0.34, platinum: 0.36 },
+  inHouse: { silver: 0.24, gold: 0.35, platinum: 0.41 },
+};
+
+const dashboardState = {
+  timeline: "today",
+  activeLocation: null,
 };
 
 function formatNumber(value) {
@@ -122,67 +168,44 @@ function parseISODate(dateText) {
   return new Date(`${dateText}T00:00:00`);
 }
 
-function aggregateFactories(rows) {
+function getSortedAssignmentRows() {
+  return [...dashboardData.assignmentHistoryDaily].sort((a, b) => b.date.localeCompare(a.date));
+}
+
+function getRowsForTimeline(timelineKey) {
+  const option = TIMELINE_OPTIONS.find((item) => item.value === timelineKey) || TIMELINE_OPTIONS[0];
+  return getSortedAssignmentRows().slice(0, option.days);
+}
+
+function aggregateLocations(rows) {
   return rows.reduce(
     (totals, row) => {
-      Object.entries(row.factories).forEach(([factoryKey, value]) => {
-        totals[factoryKey] = (totals[factoryKey] || 0) + value;
+      Object.entries(row.locations).forEach(([locationKey, value]) => {
+        totals[locationKey] = (totals[locationKey] || 0) + value;
       });
       return totals;
     },
-    { inHouse: 0, factoryA: 0, factoryB: 0 }
+    { factoryA: 0, factoryB: 0, factoryC: 0, inHouse: 0 }
   );
 }
 
-function getAssignmentSummaries() {
-  const sorted = [...dashboardData.assignmentHistoryDaily].sort((a, b) =>
-    b.date.localeCompare(a.date)
-  );
-  const latest = sorted[0];
-  const latestDate = parseISODate(latest.date);
+function splitByMetal(total, profile) {
+  const silver = Math.round(total * profile.silver);
+  const gold = Math.round(total * profile.gold);
+  const platinum = Math.max(total - silver - gold, 0);
+  return { silver, gold, platinum };
+}
 
-  const weekStart = new Date(latestDate);
-  weekStart.setDate(latestDate.getDate() - latestDate.getDay());
+function getTimelineSummary() {
+  const rows = getRowsForTimeline(dashboardState.timeline);
+  const totals = aggregateLocations(rows);
 
-  const last7Start = new Date(latestDate);
-  last7Start.setDate(latestDate.getDate() - 6);
-
-  const monthStart = new Date(latestDate.getFullYear(), latestDate.getMonth(), 1);
-
-  const sixMonthsStart = new Date(latestDate);
-  sixMonthsStart.setMonth(latestDate.getMonth() - 6);
-  sixMonthsStart.setDate(sixMonthsStart.getDate() + 1);
-
-  const yearStart = new Date(latestDate.getFullYear(), 0, 1);
-
-  const last365Start = new Date(latestDate);
-  last365Start.setDate(latestDate.getDate() - 364);
-
-  const lastYearStart = new Date(latestDate.getFullYear() - 1, 0, 1);
-  const lastYearEnd = new Date(latestDate.getFullYear() - 1, 11, 31);
-
-  const todayRows = sorted.filter((row) => row.date === latest.date);
-  const weekRows = sorted.filter((row) => parseISODate(row.date) >= weekStart);
-  const last7Rows = sorted.filter((row) => parseISODate(row.date) >= last7Start);
-  const monthRows = sorted.filter((row) => parseISODate(row.date) >= monthStart);
-  const sixMonthRows = sorted.filter((row) => parseISODate(row.date) >= sixMonthsStart);
-  const thisYearRows = sorted.filter((row) => parseISODate(row.date) >= yearStart);
-  const last365Rows = sorted.filter((row) => parseISODate(row.date) >= last365Start);
-  const lastYearRows = sorted.filter((row) => {
-    const rowDate = parseISODate(row.date);
-    return rowDate >= lastYearStart && rowDate <= lastYearEnd;
-  });
-
-  return [
-    { title: "Assigned Today", totals: aggregateFactories(todayRows) },
-    { title: "Assigned This Week", totals: aggregateFactories(weekRows) },
-    { title: "Assigned Last 7 Days", totals: aggregateFactories(last7Rows) },
-    { title: "Assigned This Month", totals: aggregateFactories(monthRows) },
-    { title: "Assigned Last 6 Months", totals: aggregateFactories(sixMonthRows) },
-    { title: "Assigned This Year", totals: aggregateFactories(thisYearRows) },
-    { title: "Assigned Last 365 Days", totals: aggregateFactories(last365Rows) },
-    { title: "Assigned Last Year", totals: aggregateFactories(lastYearRows) },
-  ];
+  return Object.keys(LOCATION_LABELS).map((locationKey) => ({
+    locationKey,
+    label: LOCATION_LABELS[locationKey],
+    total: totals[locationKey] || 0,
+    pieces: splitByMetal(totals[locationKey] || 0, PIECE_PROFILES[locationKey]),
+  }));
 }
 
 function renderKpis() {
@@ -201,33 +224,118 @@ function renderKpis() {
   ).textContent = `Last updated: ${dashboardData.updatedAt.toLocaleString()}`;
 }
 
+function getTimelineLabel() {
+  return TIMELINE_OPTIONS.find((item) => item.value === dashboardState.timeline)?.label || "Today";
+}
+
 function renderAssignedPanel() {
   const panelBody = document.getElementById("assignedPanelBody");
   panelBody.innerHTML = "";
 
-  const summaries = getAssignmentSummaries();
+  const summary = getTimelineSummary();
 
-  summaries.forEach((summary) => {
-    const periodSection = document.createElement("section");
-    periodSection.className = "assigned-period";
-
-    const rowsMarkup = Object.entries(FACTORY_LABELS)
-      .map(
-        ([factoryKey, label]) => `
-          <div class="assigned-row">
-            <span>${label}</span>
-            <strong>${formatNumber(summary.totals[factoryKey] || 0)}</strong>
+  const cardsMarkup = summary
+    .map((location) => {
+      const isActive = dashboardState.activeLocation === location.locationKey;
+      return `
+        <button class="factory-card ${isActive ? "active" : ""}" data-location="${location.locationKey}" type="button">
+          <div class="factory-card-title-row">
+            <h3>${location.label}</h3>
+            <strong>${formatNumber(location.total)}</strong>
           </div>
-        `
-      )
-      .join("");
+          <div class="tier-list">
+            <div class="tier-row"><span>Silver</span><strong>${formatNumber(location.pieces.silver)}</strong></div>
+            <div class="tier-row"><span>Gold</span><strong>${formatNumber(location.pieces.gold)}</strong></div>
+            <div class="tier-row"><span>Platinum</span><strong>${formatNumber(location.pieces.platinum)}</strong></div>
+          </div>
+        </button>
+      `;
+    })
+    .join("");
 
-    periodSection.innerHTML = `
-      <h3>${summary.title}</h3>
-      <div class="assigned-list">${rowsMarkup}</div>
+  panelBody.innerHTML = `
+    <div class="timeline-header">
+      <label for="timelineSelect">Timeline</label>
+      <select id="timelineSelect" class="timeline-select">
+        ${TIMELINE_OPTIONS.map(
+          (option) => `<option value="${option.value}" ${option.value === dashboardState.timeline ? "selected" : ""}>${option.label}</option>`
+        ).join("")}
+      </select>
+    </div>
+    <div class="factory-card-grid">${cardsMarkup}</div>
+    <section id="orderDetails" class="order-details empty">
+      <h3>Assigned orders detail</h3>
+      <p>Select a factory or in-house box to see assigned orders for ${getTimelineLabel().toLowerCase()}.</p>
+    </section>
+  `;
+}
+
+function renderOrderDetail(locationKey) {
+  const detail = document.getElementById("orderDetails");
+  if (!detail) return;
+
+  const locationLabel = LOCATION_LABELS[locationKey];
+  const orders = dashboardData.assignedOrders[locationKey] || [];
+
+  if (!locationKey || !orders.length) {
+    detail.className = "order-details empty";
+    detail.innerHTML = `
+      <h3>Assigned orders detail</h3>
+      <p>No assigned orders to show for this selection.</p>
     `;
+    return;
+  }
 
-    panelBody.appendChild(periodSection);
+  const rows = orders
+    .map(
+      (order) => `
+        <tr>
+          <td>${order.orderId}</td>
+          <td>${order.customer}</td>
+          <td>${order.metal}</td>
+          <td>${formatNumber(order.pieces)}</td>
+          <td>${order.status}</td>
+          <td>${order.dueDate}</td>
+        </tr>
+      `
+    )
+    .join("");
+
+  detail.className = "order-details";
+  detail.innerHTML = `
+    <h3>${locationLabel} · Assigned Orders (${getTimelineLabel()})</h3>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Customer</th>
+          <th>Metal</th>
+          <th>Pieces</th>
+          <th>Status</th>
+          <th>Due</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function bindAssignedPanelEvents() {
+  const panelBody = document.getElementById("assignedPanelBody");
+  panelBody.addEventListener("change", (event) => {
+    if (event.target.id !== "timelineSelect") return;
+    dashboardState.timeline = event.target.value;
+    dashboardState.activeLocation = null;
+    renderAssignedPanel();
+  });
+
+  panelBody.addEventListener("click", (event) => {
+    const card = event.target.closest(".factory-card");
+    if (!card) return;
+
+    dashboardState.activeLocation = card.dataset.location;
+    renderAssignedPanel();
+    renderOrderDetail(dashboardState.activeLocation);
   });
 }
 
@@ -345,6 +453,7 @@ function renderWeeklyTable() {
 function initDashboard() {
   renderKpis();
   renderAssignedPanel();
+  bindAssignedPanelEvents();
   renderWeeklyBars();
   renderGrowthTrend();
   renderWeeklyTable();
