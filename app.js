@@ -263,25 +263,30 @@ function renderAssignedPanel() {
       </select>
     </div>
     <div class="factory-card-grid">${cardsMarkup}</div>
-    <section id="orderDetails" class="order-details empty">
-      <h3>Assigned orders detail</h3>
-      <p>Select a factory or in-house box to see assigned orders for ${getTimelineLabel().toLowerCase()}.</p>
-    </section>
   `;
 }
 
+function closeOrderOverlay() {
+  const overlay = document.getElementById("orderOverlay");
+  if (!overlay) return;
+  overlay.hidden = true;
+}
+
 function renderOrderDetail(locationKey) {
-  const detail = document.getElementById("orderDetails");
-  if (!detail) return;
+  const overlayTitle = document.getElementById("orderOverlayTitle");
+  const overlayContent = document.getElementById("orderOverlayContent");
+  if (!overlayTitle || !overlayContent) return;
 
   const locationLabel = LOCATION_LABELS[locationKey];
   const orders = dashboardData.assignedOrders[locationKey] || [];
 
   if (!locationKey || !orders.length) {
-    detail.className = "order-details empty";
-    detail.innerHTML = `
-      <h3>Assigned orders detail</h3>
+    overlayTitle.textContent = "Assigned orders detail";
+    overlayContent.innerHTML = `
+      <section class="order-details empty">
+        <h3>Assigned orders detail</h3>
       <p>No assigned orders to show for this selection.</p>
+      </section>
     `;
     return;
   }
@@ -301,23 +306,33 @@ function renderOrderDetail(locationKey) {
     )
     .join("");
 
-  detail.className = "order-details";
-  detail.innerHTML = `
-    <h3>${locationLabel} · Assigned Orders (${getTimelineLabel()})</h3>
-    <table class="order-table">
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>Customer</th>
-          <th>Metal</th>
-          <th>Pieces</th>
-          <th>Status</th>
-          <th>Due</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
+  overlayTitle.textContent = `${locationLabel} · Assigned Orders (${getTimelineLabel()})`;
+  overlayContent.innerHTML = `
+    <section class="order-details">
+      <div class="order-table-wrap">
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Customer</th>
+              <th>Metal</th>
+              <th>Pieces</th>
+              <th>Status</th>
+              <th>Due</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </section>
   `;
+}
+
+function openOrderOverlay(locationKey) {
+  const overlay = document.getElementById("orderOverlay");
+  if (!overlay) return;
+  overlay.hidden = false;
+  renderOrderDetail(locationKey);
 }
 
 function bindAssignedPanelEvents() {
@@ -326,6 +341,7 @@ function bindAssignedPanelEvents() {
     if (event.target.id !== "timelineSelect") return;
     dashboardState.timeline = event.target.value;
     dashboardState.activeLocation = null;
+    closeOrderOverlay();
     renderAssignedPanel();
   });
 
@@ -335,7 +351,27 @@ function bindAssignedPanelEvents() {
 
     dashboardState.activeLocation = card.dataset.location;
     renderAssignedPanel();
-    renderOrderDetail(dashboardState.activeLocation);
+    openOrderOverlay(dashboardState.activeLocation);
+  });
+}
+
+function bindOverlayEvents() {
+  const overlay = document.getElementById("orderOverlay");
+  const closeButton = document.getElementById("closeOrderOverlay");
+  if (!overlay || !closeButton) return;
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target.dataset.overlayClose === "true") {
+      closeOrderOverlay();
+    }
+  });
+
+  closeButton.addEventListener("click", closeOrderOverlay);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !overlay.hidden) {
+      closeOrderOverlay();
+    }
   });
 }
 
@@ -454,6 +490,7 @@ function initDashboard() {
   renderKpis();
   renderAssignedPanel();
   bindAssignedPanelEvents();
+  bindOverlayEvents();
   renderWeeklyBars();
   renderGrowthTrend();
   renderWeeklyTable();
