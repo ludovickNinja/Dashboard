@@ -75,6 +75,24 @@
       </section>
     </main>
 
+    <div id="orderOverlay" class="order-overlay" hidden>
+      <div class="order-overlay-backdrop" data-overlay-close="true"></div>
+      <section
+        class="order-overlay-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="orderOverlayTitle"
+      >
+        <header class="order-overlay-header">
+          <h2 id="orderOverlayTitle">Assigned orders detail</h2>
+          <button id="closeOrderOverlay" class="overlay-close-btn" type="button" aria-label="Close detail view">
+            ✕
+          </button>
+        </header>
+        <div id="orderOverlayContent" class="order-overlay-content"></div>
+      </section>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>
