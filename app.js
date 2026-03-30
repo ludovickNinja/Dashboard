@@ -208,9 +208,17 @@ function getTimelineSummary() {
   }));
 }
 
+function getToBeProcessedCount() {
+  const { pending, assignedFactory, inHouse } = dashboardData.orders;
+  return Math.max(pending - assignedFactory - inHouse, 0);
+}
+
 function renderKpis() {
   document.getElementById("pendingOrders").textContent = formatNumber(
     dashboardData.orders.pending
+  );
+  document.getElementById("toBeProcessed").textContent = formatNumber(
+    getToBeProcessedCount()
   );
   document.getElementById("factoryAssigned").textContent = formatNumber(
     dashboardData.orders.assignedFactory
